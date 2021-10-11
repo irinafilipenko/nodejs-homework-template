@@ -13,7 +13,7 @@ const router = express.Router()
 
 router.get('/', authenticate, controllerWrapper(ctrl.listContacts))
 
-// router.get('/:contactId', controllerWrapper(ctrl.getContactById))
+router.get('/:contactId', authenticate, controllerWrapper(ctrl.getContactById))
 
 router.post(
   '/',
@@ -22,18 +22,24 @@ router.post(
   controllerWrapper(ctrl.addContact),
 )
 
-// router.delete('/:contactId', controllerWrapper(ctrl.removeContact))
+router.delete(
+  '/:contactId',
+  authenticate,
+  controllerWrapper(ctrl.removeContact),
+)
 
-// router.put(
-//   '/:contactId',
-//   validation(joiSchema),
-//   controllerWrapper(ctrl.updateById),
-// )
+router.put(
+  '/:contactId',
+  authenticate,
+  validation(joiSchema),
+  controllerWrapper(ctrl.updateById),
+)
 
-// router.patch(
-//   '/:contactId/favorite',
-//   validation(updateFavoriteJoiSchema),
-//   controllerWrapper(ctrl.updateFavorite),
-// )
+router.patch(
+  '/:contactId/favorite',
+  authenticate,
+  validation(updateFavoriteJoiSchema),
+  controllerWrapper(ctrl.updateFavorite),
+)
 
 module.exports = router

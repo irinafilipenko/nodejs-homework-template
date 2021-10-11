@@ -19,4 +19,6 @@ router.get('/logout', authenticate, controllerWrapper(ctrl.logout))
 
 router.patch('/avatars', authenticate, upload.single('avatar'), ctrl.avatars)
 
+router.get('/current', authenticate, controllerWrapper(ctrl.current))
+
 module.exports = router
